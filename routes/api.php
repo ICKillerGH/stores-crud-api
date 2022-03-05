@@ -20,6 +20,7 @@ Route::prefix('/stores')->name('stores.')->group(function() {
 
 Route::prefix('/store-reviews')->name('storeReviews.')->group(function() {
     Route::post('/', [StoreReviewsController::class, 'store']);
+    Route::get('/count', [StoreReviewsController::class, 'count']);
 });
 
 Route::prefix('/users')->name('users.')->middleware('auth:sanctum')->group(function() {
