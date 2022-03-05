@@ -13,7 +13,10 @@ class StoresController extends Controller
 {
     public function index(Request $request)
     {
-        $stores = Store::with('storeReviews')->paginate($request->query('per_page', 10));
+        $stores = Store::query()
+            ->with('storeReviews')
+            ->withCount('storeReviews')
+            ->paginate($request->query('per_page', 10));
 
         return $stores;
     }
@@ -29,7 +32,7 @@ class StoresController extends Controller
 
     public function show(Store $store)
     {
-        $store->load('storeReviews');
+        $store->load('storeReviews')->loadCount('storeReviews');
         
         return $store;
     }
