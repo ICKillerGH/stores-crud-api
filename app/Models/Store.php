@@ -14,6 +14,15 @@ class Store extends Model
 
     protected $spatialFields = ['location'];
 
+    protected $fillable = [
+        'name',
+        'address',
+        'phone_number',
+        'email',
+        'image_path',
+        'location'
+    ];
+
     /**
      * Relationships
      */
@@ -21,7 +30,7 @@ class Store extends Model
     {
         return $this->hasMany(StoreReview::class);
     }
-    
+
     /**
      * Mutators
      */
