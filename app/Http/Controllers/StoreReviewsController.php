@@ -9,7 +9,10 @@ class StoreReviewsController extends Controller
 {
     public function store(StoreStoreReviewRequest $request)
     {
-        $storeReview = StoreReview::create($request->validated());
+        $storeReview = StoreReview::create([
+            'content' => $request->content,
+            'store_id' => $request->store_id
+        ]);
 
         return $storeReview;
     }

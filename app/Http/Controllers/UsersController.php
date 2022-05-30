@@ -15,12 +15,14 @@ class UsersController extends Controller
 
         return $users;
     }
-    
+
     public function store(StoreUserRequest $request)
     {
-        $user = new User($request->validated());
-        $user->password = bcrypt($request->password);
-        $user->save();
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'paswword' => bcrypt($request->password)
+        ]);
 
         return $user;
     }
@@ -29,15 +31,16 @@ class UsersController extends Controller
     {
         return $user;
     }
-    
+
     public function update(StoreUserRequest $request, User $user)
     {
-        $user = $user->fill($request->safe()->except('password'));
-        
+        $user->name = $request->name;
+        $user->email = $request->email;
+
         if ($request->password) {
             $user->password = bcrypt($request->password);
         }
-        
+
         $user->save();
 
         return $user;

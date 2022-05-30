@@ -23,8 +23,15 @@ class StoresController extends Controller
 
     public function store(StoreStoreRequest $request)
     {
-        $store = new Store( $request->safe()->except(['latitude', 'longitude']) );
-        $store->location = new Point($request->latitude, $request->longitude);
+        $store = Store::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'image' => $request->image,
+            'location' => new Point($request->latitude, $request->longitude)
+        ]);
+
         $store->save();
 
         return $store;
@@ -33,13 +40,16 @@ class StoresController extends Controller
     public function show(Store $store)
     {
         $store->load('storeReviews')->loadCount('storeReviews');
-        
+
         return $store;
     }
 
     public function update(StoreStoreRequest $request, Store $store)
     {
-        $store->fill($request->safe()->except(['latitude', 'longitude', 'image']));
+        $store->name = $request->name;
+        $store->email = $request->email;
+        $store->address = $request->address;
+        $store->phone_number = $request->phone_number;
         $store->location = new Point($request->latitude, $request->longitude);
 
         if ($request->image) {

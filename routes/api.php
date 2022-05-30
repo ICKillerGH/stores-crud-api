@@ -10,7 +10,7 @@ Route::prefix('/auth')->name('auth.')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
 
-Route::prefix('/stores')->name('stores.')->group(function() {
+Route::prefix('/stores')->name('stores.')->group(function () {
     Route::get('/', [StoresController::class, 'index'])->name('index');
     Route::post('/', [StoresController::class, 'store'])->name('store')->middleware('auth:sanctum');
     Route::get('/{store}', [StoresController::class, 'show'])->name('show');
@@ -18,12 +18,12 @@ Route::prefix('/stores')->name('stores.')->group(function() {
     Route::delete('/{store}', [StoresController::class, 'destroy'])->name('destroy')->middleware('auth:sanctum');
 });
 
-Route::prefix('/store-reviews')->name('storeReviews.')->group(function() {
+Route::prefix('/store-reviews')->name('storeReviews.')->group(function () {
     Route::post('/', [StoreReviewsController::class, 'store']);
     Route::get('/count', [StoreReviewsController::class, 'count']);
 });
 
-Route::prefix('/users')->name('users.')->middleware('auth:sanctum')->group(function() {
+Route::prefix('/users')->name('users.')->middleware('auth:sanctum')->group(function () {
     Route::get('/', [UsersController::class, 'index'])->name('index');
     Route::post('/', [UsersController::class, 'store'])->name('store');
     Route::get('/{user}', [UsersController::class, 'show'])->name('show');
