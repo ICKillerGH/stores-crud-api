@@ -16,6 +16,7 @@ class StoresController extends Controller
         $stores = Store::query()
             ->with('storeReviews')
             ->withCount('storeReviews')
+            ->when($request->name, fn($query, $name) => $query->where('name', 'LIKE', "%$name%"))
             ->paginate($request->query('per_page', 10));
 
         return $stores;
