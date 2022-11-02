@@ -21,7 +21,7 @@ class Store extends Model
     {
         return $this->hasMany(StoreReview::class);
     }
-    
+
     /**
      * Mutators
      */
@@ -37,7 +37,7 @@ class Store extends Model
      */
     public function getImagePathAttribute($value)
     {
-        return Storage::url($value);
+        return $value ? Storage::url($value) : null;
     }
 
     public function getLocationAttribute($value)

@@ -16,8 +16,6 @@ class StoreReviewsController extends Controller
 
     public function count()
     {
-        return [
-            'count' => StoreReview::count(),
-        ];
+        return StoreReview::count();
     }
 }

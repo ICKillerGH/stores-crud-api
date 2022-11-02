@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreStoreRequest extends FormRequest
+class StoreProductCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,15 +25,8 @@ class StoreStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'address' => 'required|max:255',
-            'phoneNumber' => 'required|max:50',
-            'email' => 'required|email',
-            'latitude' => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
-            'image' => [
-                Rule::requiredIf(!$this->store),
-                'image',
-            ],
+            'description' => 'required|max:2000',
+            'parentId' => 'nullable|exists:product_categories,id'
         ];
     }
 }
